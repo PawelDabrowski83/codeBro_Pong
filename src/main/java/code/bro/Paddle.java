@@ -3,6 +3,9 @@ package code.bro;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import static code.bro.GamePanel.GAME_HEIGHT;
+import static code.bro.GamePanel.PADDLE_HEIGHT;
+
 public class Paddle extends Rectangle{
 
     int id;
@@ -41,28 +44,12 @@ public class Paddle extends Rectangle{
     }
 
     public void keyReleased(KeyEvent e) {
-        switch (id) {
-            case 1 -> {
-                if (e.getKeyCode() == KeyEvent.VK_W) {
-                    setYDirection(0);
-                    move();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_S) {
-                    setYDirection(0);
-                    move();
-                }
-            }
-            case 2 -> {
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    setYDirection(0);
-                    move();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    setYDirection(0);
-                    move();
-                }
-            }
-        }
+        stopYMove();
+    }
+
+    private void stopYMove() {
+        setYDirection(0);
+        move();
     }
 
     public void setYDirection(int yDirection) {
@@ -82,5 +69,14 @@ public class Paddle extends Rectangle{
         }
         g.fillRect(x, y, width, height);
 
+    }
+
+    protected void checkBoundaries() {
+        if (y <= 0) {
+            y = 0;
+        }
+        if (y >= GAME_HEIGHT - PADDLE_HEIGHT) {
+            y = GAME_HEIGHT - PADDLE_HEIGHT;
+        }
     }
 }

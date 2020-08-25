@@ -3,6 +3,8 @@ package code.bro;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static code.bro.GamePanel.*;
+
 public class Ball extends Rectangle {
 
     int xVelocity;
@@ -40,6 +42,48 @@ public class Ball extends Rectangle {
     public void draw(Graphics g) {
         g.setColor(Color.white);
         g.fillOval(x, y, width, height);
-
     }
+
+    protected void bounce(Paddle paddle) {
+        xVelocity = Math.abs(xVelocity);
+        xVelocity++; // speeds up ball
+        if (yVelocity > 0) {
+            yVelocity++; // speeds up ball
+        } else {
+            yVelocity--;
+        }
+        if (paddle.id == 1) {
+            setXDirection(xVelocity);
+        } else {
+            setXDirection(-xVelocity);
+        }
+        setYDirection(yVelocity);
+    }
+
+    protected void checkForBounce(Paddle paddle) {
+        if (this.intersects(paddle)) {
+            bounce(paddle);
+        }
+    }
+
+    protected void checkBoundaries() {
+        if (y <= 0) {
+            setYDirection(-yVelocity);
+        }
+        if (y >= GAME_HEIGHT - BALL_DIAMETER) {
+            setYDirection(-yVelocity);
+        }
+    }
+
+    protected void checkForPoint(Score score, GamePanel panel) {
+        if (x <= 0) {
+            score.player2++;
+            panel.prepareNewGame();
+        }
+        if (x >= GAME_WIDTH - BALL_DIAMETER) {
+            score.player1++;
+            panel.prepareNewGame();
+        }
+    }
+
 }
