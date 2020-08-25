@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -17,7 +17,6 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     Image image;
     Graphics graphics;
-    Random random;
     Paddle paddle1;
     Paddle paddle2;
     Ball ball;
@@ -36,8 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newBall() {
-        random = new Random();
-        ball = new Ball((GAME_WIDTH / 2) - (BALL_DIAMETER / 2), random.nextInt(GAME_HEIGHT - BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
+        ball = new Ball((GAME_WIDTH / 2) - (BALL_DIAMETER / 2), ThreadLocalRandom.current().nextInt(GAME_HEIGHT - BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
     }
 
     public void newPaddles() {
