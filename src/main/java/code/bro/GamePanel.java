@@ -9,11 +9,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GamePanel extends JPanel implements Runnable {
 
     static final int GAME_WIDTH = 1000;
+    static final int CENTER_WIDTH = GAME_WIDTH / 2;
     static final int GAME_HEIGHT = (int) ((GAME_WIDTH * 0.5555));
+    static final int CENTER_HEIGHT = GAME_HEIGHT / 2;
     static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
     static final int BALL_DIAMETER = 20;
     static final int PADDLE_WIDTH = 25;
     static final int PADDLE_HEIGHT = 100;
+    static final double AMOUNT_OF_TICKS = 60.0;
     Thread gameThread;
     Image image;
     Graphics graphics;
@@ -35,12 +38,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newBall() {
-        ball = new Ball((GAME_WIDTH / 2) - (BALL_DIAMETER / 2), ThreadLocalRandom.current().nextInt(GAME_HEIGHT - BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
+        ball = new Ball((CENTER_WIDTH) - (BALL_DIAMETER / 2), ThreadLocalRandom.current().nextInt(GAME_HEIGHT - BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
     }
 
     public void newPaddles() {
-        paddle1 = new Paddle(0, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 1);
-        paddle2 = new Paddle(GAME_WIDTH - PADDLE_WIDTH, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 2);
+        paddle1 = new Paddle(0, CENTER_HEIGHT - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 1);
+        paddle2 = new Paddle(GAME_WIDTH - PADDLE_WIDTH, CENTER_HEIGHT - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 2);
     }
 
     public void paint(Graphics g) {
@@ -98,13 +101,13 @@ public class GamePanel extends JPanel implements Runnable {
         if (paddle1.y <= 0) {
             paddle1.y = 0;
         }
-        if (paddle1.y >= (GAME_HEIGHT - PADDLE_HEIGHT)) {
+        if (paddle1.y >= GAME_HEIGHT - PADDLE_HEIGHT) {
             paddle1.y = GAME_HEIGHT - PADDLE_HEIGHT;
         }
         if (paddle2.y <= 0) {
             paddle2.y = 0;
         }
-        if (paddle2.y >= (GAME_HEIGHT - PADDLE_HEIGHT)) {
+        if (paddle2.y >= GAME_HEIGHT - PADDLE_HEIGHT) {
             paddle2.y = GAME_HEIGHT - PADDLE_HEIGHT;
         }
         //give a player1 point and create new paddles and ball
@@ -125,8 +128,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         //game loop
         long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
-        double ns = 1000000000 / amountOfTicks;
+        double ns = 1000000000 / AMOUNT_OF_TICKS;
         double delta = 0;
         while(true) {
             long now = System.nanoTime();
