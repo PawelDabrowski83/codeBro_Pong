@@ -32,27 +32,21 @@ public class Score extends Rectangle{
                 GAME_HEIGHT
         );
         g.drawString(
-                printScore(player1),
+                String.format("%02d", player1),
                 CENTER_WIDTH + SCORE_MARGIN_LEFT,
                 SCORE_HEIGHT
         );
         g.drawString(
-                printScore(player2),
+                String.format("%02d", player2),
                 CENTER_WIDTH + SCORE_MARGIN_RIGHT,
                 SCORE_HEIGHT
         );
+        g.setColor(Color.gray);
         g.drawString(
-                "Highscore: " + printScore(HIGHSCORE),
+                "Highscore: " + String.format("%02d", HIGHSCORE),
                 CENTER_WIDTH + HIGHSCORE_MARGIN,
                 GAME_HEIGHT - 100
         );
-    }
-
-    private String printScore(int score) {
-        if (score < 10) {
-            return String.valueOf(score);
-        }
-        return String.valueOf(score / 10) + score % 10;
     }
 
 }
