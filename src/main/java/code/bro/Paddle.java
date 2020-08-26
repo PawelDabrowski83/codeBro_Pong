@@ -22,25 +22,26 @@ public class Paddle extends Rectangle{
         switch (id) {
             case 1 -> {
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-                    setYDirection(-speed);
-                    move();
+                    moveWithSpeed(-speed);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
-                    setYDirection(speed);
-                    move();
+                    moveWithSpeed(speed);
                 }
             }
             case 2 -> {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    setYDirection(-speed);
-                    move();
+                    moveWithSpeed(-speed);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    setYDirection(speed);
-                    move();
+                    moveWithSpeed(speed);
                 }
             }
         }
+    }
+
+    private void moveWithSpeed(int speed) {
+        setYDirection(speed);
+        move();
     }
 
     public void keyReleased(KeyEvent e) {
