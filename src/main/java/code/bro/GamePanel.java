@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
     Score score;
 
     GamePanel() {
-        prepareNewGame();
+        prepareNewStage();
         score = new Score(GAME_WIDTH, GAME_HEIGHT);
         this.setFocusable(true);
         this.addKeyListener(new AL());
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
-    protected void prepareNewGame() {
+    protected void prepareNewStage() {
         newPaddles();
         newBall();
     }
