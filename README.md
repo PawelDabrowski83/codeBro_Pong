@@ -1,3 +1,13 @@
 # codeBro_Pong
 
-This is my first project with Swing taken from YT tutorial. 
+Project created with YT tutorial: https://www.youtube.com/watch?v=oLirZqJFKPE
+
+ ![Pong screenshot](images/pong.png)
+ 
+ Additional features:
+ * code refactoring
+ * press ESCAPE to quit game
+ * added highscore
+ * highscore read and writen to file
+ 
+
