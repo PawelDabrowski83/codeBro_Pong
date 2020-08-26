@@ -78,19 +78,20 @@ public class Ball extends Rectangle {
     protected void checkForPoint(Score score, GamePanel panel) {
         if (x <= 0) {
             score.player2++;
-            checkForHighscore(score.player2);
+            checkForHighscore(score.player2, panel);
             panel.prepareNewStage();
         }
         if (x >= GAME_WIDTH - BALL_DIAMETER) {
             score.player1++;
-            checkForHighscore(score.player1);
+            checkForHighscore(score.player1, panel);
             panel.prepareNewStage();
         }
     }
 
-    protected void checkForHighscore(int score) {
+    protected void checkForHighscore(int score, GamePanel panel) {
         if (score > Score.HIGHSCORE) {
             Score.HIGHSCORE = score;
+            panel.writeHighscoreToFile();
         }
     }
 

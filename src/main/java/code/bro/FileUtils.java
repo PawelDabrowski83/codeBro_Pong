@@ -4,7 +4,7 @@ import java.io.*;
 
 public class FileUtils {
 
-    public static void copy(InputStream input, OutputStream output, int bufferSize)
+    protected static void copy(InputStream input, OutputStream output, int bufferSize)
             throws IOException {
         if (bufferSize < 1) {
             bufferSize = 1;

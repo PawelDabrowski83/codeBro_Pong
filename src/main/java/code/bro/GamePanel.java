@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -61,6 +62,17 @@ public class GamePanel extends JPanel implements Runnable {
             e.printStackTrace();
         }
         return highscore;
+    }
+
+    protected void writeHighscoreToFile() {
+        File file = new File(HIGHSCORE_FILE);
+        String message = String.valueOf(Score.HIGHSCORE);
+        byte[] highscoreByte = message.getBytes();
+        try {
+            FileUtils.writeFile(file, highscoreByte);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void newBall() {
