@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -17,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     static final int PADDLE_WIDTH = 25;
     static final int PADDLE_HEIGHT = 100;
     static final double AMOUNT_OF_TICKS = 60.0;
-    static final String HIGHSCORE_FILE = "/src/main/resources/highscore.txt";
+    static final String HIGHSCORE_FILE = "src/main/resources/highscore.txt";
     Thread gameThread;
     Image image;
     Graphics graphics;
@@ -29,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     GamePanel() {
         prepareNewStage();
         score = new Score(GAME_WIDTH, GAME_HEIGHT);
+        Score.HIGHSCORE = readHighscoreFromFile();
         this.setFocusable(true);
         this.addKeyListener(new AL());
         this.setPreferredSize(SCREEN_SIZE);
@@ -41,9 +45,23 @@ public class GamePanel extends JPanel implements Runnable {
         newBall();
     }
 
-//    protected int readHighscoreFromFile() {
-//
-//    }
+    protected int readHighscoreFromFile() {
+        File file = new File(HIGHSCORE_FILE);
+        byte[] highscoreByte = new byte[0];
+        try {
+            highscoreByte = FileUtils.readFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String highscoreAsString = new String(highscoreByte);
+        int highscore = 0;
+        try {
+            highscore = Integer.parseInt(highscoreAsString);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return highscore;
+    }
 
     public void newBall() {
         ball = new Ball(
