@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements Runnable {
     static final int PADDLE_WIDTH = 25;
     static final int PADDLE_HEIGHT = 100;
     static final double AMOUNT_OF_TICKS = 60.0;
+    static final String HIGHSCORE_FILE = "/src/main/resources/highscore.txt";
     Thread gameThread;
     Image image;
     Graphics graphics;
@@ -39,6 +40,10 @@ public class GamePanel extends JPanel implements Runnable {
         newPaddles();
         newBall();
     }
+
+//    protected int readHighscoreFromFile() {
+//
+//    }
 
     public void newBall() {
         ball = new Ball(
