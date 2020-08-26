@@ -44,10 +44,6 @@ public class Paddle extends Rectangle{
     }
 
     public void keyReleased(KeyEvent e) {
-        stopYMove();
-    }
-
-    private void stopYMove() {
         setYDirection(0);
         move();
     }

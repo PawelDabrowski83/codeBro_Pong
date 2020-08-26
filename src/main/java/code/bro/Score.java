@@ -8,9 +8,11 @@ public class Score extends Rectangle{
 
     static int GAME_WIDTH;
     static int GAME_HEIGHT;
+    static int HIGHSCORE;
     static final int SCORE_HEIGHT = 50;
     static final int SCORE_MARGIN_LEFT = -85;
     static final int SCORE_MARGIN_RIGHT = 20;
+    static final int HIGHSCORE_MARGIN = -200;
     int player1;
     int player2;
 
@@ -23,10 +25,34 @@ public class Score extends Rectangle{
         g.setColor(Color.white);
         g.setFont(new Font("Consolas", Font.PLAIN, 60));
 
-        g.drawLine(GAME_WIDTH / 2, 0, CENTER_WIDTH, GAME_HEIGHT);
-        g.drawString(String.valueOf(player1 / 10) + String.valueOf(player1 % 10), CENTER_WIDTH + SCORE_MARGIN_LEFT, SCORE_HEIGHT);
-        g.drawString(String.valueOf(player2 / 10) + String.valueOf(player2 % 10), CENTER_WIDTH + SCORE_MARGIN_RIGHT, SCORE_HEIGHT);
+        g.drawLine(
+                GAME_WIDTH / 2,
+                0,
+                CENTER_WIDTH,
+                GAME_HEIGHT
+        );
+        g.drawString(
+                printScore(player1),
+                CENTER_WIDTH + SCORE_MARGIN_LEFT,
+                SCORE_HEIGHT
+        );
+        g.drawString(
+                printScore(player2),
+                CENTER_WIDTH + SCORE_MARGIN_RIGHT,
+                SCORE_HEIGHT
+        );
+        g.drawString(
+                "Highscore: " + printScore(HIGHSCORE),
+                CENTER_WIDTH + HIGHSCORE_MARGIN,
+                GAME_HEIGHT - 100
+        );
+    }
 
+    private String printScore(int score) {
+        if (score < 10) {
+            return String.valueOf(score);
+        }
+        return String.valueOf(score / 10) + score % 10;
     }
 
 }

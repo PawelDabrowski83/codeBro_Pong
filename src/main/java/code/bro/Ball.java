@@ -44,6 +44,12 @@ public class Ball extends Rectangle {
         g.fillOval(x, y, width, height);
     }
 
+    protected void checkForBounce(Paddle paddle) {
+        if (this.intersects(paddle)) {
+            bounce(paddle);
+        }
+    }
+
     protected void bounce(Paddle paddle) {
         xVelocity = Math.abs(xVelocity);
         xVelocity++; // speeds up ball
@@ -58,12 +64,6 @@ public class Ball extends Rectangle {
             setXDirection(-xVelocity);
         }
         setYDirection(yVelocity);
-    }
-
-    protected void checkForBounce(Paddle paddle) {
-        if (this.intersects(paddle)) {
-            bounce(paddle);
-        }
     }
 
     protected void checkBoundaries() {
