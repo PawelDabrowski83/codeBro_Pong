@@ -6,6 +6,12 @@ public class FileUtils {
 
     public static void copy(InputStream input, OutputStream output, int bufferSize)
             throws IOException {
+        if (bufferSize < 1) {
+            bufferSize = 1;
+        }
+        if (bufferSize > 100_000) {
+            bufferSize = 100_000;
+        }
         byte[] buf = new byte[bufferSize];
         int bytesRead = input.read(buf);
         while (bytesRead != -1) {
