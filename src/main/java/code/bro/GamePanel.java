@@ -117,6 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
         public void keyPressed(KeyEvent e) {
             paddle1.keyPressed(e);
             paddle2.keyPressed(e);
+            keyPressedToQuit(e);
         }
         public void keyReleased(KeyEvent e) {
             paddle1.keyReleased(e);
@@ -124,6 +125,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
 
+    }
+
+    protected void keyPressedToQuit(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        }
     }
 
 }
